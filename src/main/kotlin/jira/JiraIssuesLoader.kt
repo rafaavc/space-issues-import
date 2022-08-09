@@ -66,6 +66,7 @@ private class JiraIssuesLoader(private val jiraUrl: String, username: String?, p
                 .fail { e ->
                     throw e.cause ?: e // unwrap original cause from ExecutionException
                 }
+                .claim()
         } while (current < total)
 
         return IssuesLoadResult.Success(allIssues.toList(), emptyMap())

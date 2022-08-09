@@ -8,12 +8,9 @@ import io.ktor.client.engine.apache.*
 import io.ktor.client.features.logging.*
 import io.ktor.util.*
 import org.slf4j.LoggerFactory
-import space.jetbrains.api.runtime.BatchInfo
-import space.jetbrains.api.runtime.SpaceHttpClient
-import space.jetbrains.api.runtime.SpaceHttpClientWithCallContext
+import space.jetbrains.api.runtime.*
 import space.jetbrains.api.runtime.resources.projects
 import space.jetbrains.api.runtime.types.*
-import space.jetbrains.api.runtime.withPermanentToken
 
 class SpaceUploader {
     companion object {
@@ -51,7 +48,7 @@ class SpaceUploader {
                 }
             }
 
-        val spaceClient = SpaceHttpClient(httpClient).withPermanentToken(token, server)
+        val spaceClient = SpaceHttpClient(httpClient).withPermanentToken(serverUrl = server, token = token)
 
         if (dryRun) logger.info("[DRY RUN]")
 
